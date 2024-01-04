@@ -1,18 +1,28 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.bofa1ex.dlvx</id>
-    <name>dlvx Template</name>
-    <vendor>bofa1ex</vendor>
+  <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+  <id>com.bofa1ex.dlvx</id>
 
-    <depends>com.intellij.modules.platform</depends>
+  <!-- Public plugin name should be written in Title Case.
+       Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+  <name>Dlvx</name>
 
-    <resource-bundle>messages.MyBundle</resource-bundle>
+  <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+  <vendor email="bofa1exx@gmail.com">icoder</vendor>
 
-    <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.bofa1ex.dlvx.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-    </extensions>
+  <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+       Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+       Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+  <!-- Product and plugin compatibility requirements.
+       Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+  <depends>com.intellij.modules.platform</depends>
+  <depends>org.jetbrains.plugins.go</depends>
 
-    <applicationListeners>
-        <listener class="com.github.bofa1ex.dlvx.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
-    </applicationListeners>
+  <!-- Extension points defined by the plugin.
+       Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+  <extensions defaultExtensionNs="com.intellij">
+    <xdebugger.breakpointType implementation="io.github.bofa1ex.dlvx.breakpoint.DlvFunctionBreakPointType"/>
+<!--    <programRunner implementation="io.github.bofa1ex.dlvx.run.DlvxGoDebugRunner"/>-->
+    <configurationType implementation="io.github.bofa1ex.dlvx.execution.DlvxRemoteDebugConfigurationType"/>
+  </extensions>
 </idea-plugin>
