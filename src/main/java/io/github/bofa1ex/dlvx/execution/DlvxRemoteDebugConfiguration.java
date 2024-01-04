@@ -1,6 +1,5 @@
 package io.github.bofa1ex.dlvx.execution;
 
-import com.goide.dlv.DlvDebugProcess;
 import com.goide.dlv.DlvDisconnectOption;
 import com.goide.dlv.DlvRemoteVmConnection;
 import com.goide.execution.DlvRemoteDebugDisconnectOption;

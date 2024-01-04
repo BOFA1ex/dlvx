@@ -1,16 +1,15 @@
 package io.github.bofa1ex.dlvx.execution;
 
-import com.esotericsoftware.kryo.kryo5.util.Null;
 import com.goide.dlv.protocol.DlvApi;
 import com.goide.dlv.protocol.DlvRequest;
 import com.goide.i18n.GoBundle;
 import com.goide.psi.GoFunctionOrMethodDeclaration;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.xdebugger.XExpression;
 import com.intellij.xdebugger.XSourcePosition;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import io.github.bofa1ex.dlvx.DlvMirrorDebugProcess;
+import io.github.bofa1ex.dlvx.DlvxBundle;
 import io.github.bofa1ex.dlvx.breakpoint.DlvFunctionBreakPointType;
 import io.github.bofa1ex.dlvx.breakpoint.DlvFunctionBreakpointProperties;
 import io.github.bofa1ex.dlvx.protocol.DlvCreateFunctionBreakpoint;
@@ -62,15 +61,27 @@ public class DlvFunctionBreakpointHandler extends DlvBreakpointProxyHandler<XLin
         final Promise<List<DlvApi.Location>> findLocationPromise = mirrorDebugProcess.send(new DlvRequest.FindLocation(breakpoint.getProperties().functionName));
         return findLocationPromise.thenAsync(locations -> {
             if (locations.isEmpty()) {
-                mirrorDebugProcess.getSession().setBreakpointVerified(breakpoint);
+                mirrorDebugProcess.getSession().setBreakpointInvalid(breakpoint, DlvxBundle.message("go.debugger.no.location.information.for.function", breakpoint.getProperties().functionName));
                 return Promises.resolvedPromise();
             }
+            if (locations.size() > 1) {
+                mirrorDebugProcess.getSession().setBreakpointInvalid(breakpoint, DlvxBundle.message("go.debugger.duplicate.location.information.for.function", breakpoint.getProperties().functionName));
+                return Promises.rejectedPromise();
+            }
+
             return mirrorDebugProcess.send(new DlvCreateFunctionBreakpoint(locations.get(0).pc));
         }).onSuccess((b) -> {
+            mirrorDebugProcess.refreshSources();
             mirrorDebugProcess.breakpoints().put(breakpoint, b.id);
             mirrorDebugProcess.getSession().setBreakpointVerified(breakpoint);
         }).onError((t) -> {
             String message = t == null ? null : t.getMessage();
+            if (message != null && message.contains("not found")) {
+                message = GoBundle.message("go.debugger.no.debug.information.for.file", breakpoint.getProperties().functionName);
+            }
+            if (message != null && message.contains("Breakpoint exists")) {
+                message = DlvxBundle.message("go.debugger.exists.breakpoint", message);
+            }
             if (message != null && message.equals("could not find file " + path)) {
                 message = GoBundle.message("go.debugger.no.debug.information.for.file", path);
             }

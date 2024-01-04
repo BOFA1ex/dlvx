@@ -7,6 +7,7 @@ import com.goide.dlv.protocol.DlvRequest;
 import com.goide.i18n.GoBundle;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import io.github.bofa1ex.dlvx.DlvMirrorDebugProcess;
+import io.github.bofa1ex.dlvx.DlvxBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.concurrency.Promise;
@@ -24,6 +25,12 @@ public class DlvMirrorBreakpointHandler extends DlvBreakpointProxyHandler<XLineB
                     mirrorDebugProcess.getSession().setBreakpointVerified(breakpoint);
                 }).onError((t) -> {
                     String message = t == null ? null : t.getMessage();
+                    if (message != null && message.contains("not found")) {
+                        message = GoBundle.message("go.debugger.no.debug.information.for.file", path);
+                    }
+                    if (message != null && message.contains("Breakpoint exists")) {
+                        message = DlvxBundle.message("go.debugger.exists.breakpoint", message);
+                    }
                     if (message != null && message.equals("could not find file " + path)) {
                         message = GoBundle.message("go.debugger.no.debug.information.for.file", path);
                     }

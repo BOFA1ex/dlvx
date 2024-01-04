@@ -16,9 +16,7 @@ public class DlvCreateFunctionBreakpoint extends OutMessage implements Request<D
             JsonWriter w = this.getWriter();
             w.name("method").value(this.getMethodName());
             w.name("params").beginArray().beginObject();
-            w.name("Breakpoint").beginObject()
-                    .name("addr").value(addr)
-                    .endObject();
+            w.name("Breakpoint").beginObject().name("addr").value(addr).endObject();
             w.endObject().endArray();
         } catch (IOException var3) {
             throw new RuntimeException(var3);

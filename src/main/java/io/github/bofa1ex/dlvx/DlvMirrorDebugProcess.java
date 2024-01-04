@@ -43,6 +43,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.InetSocketAddress;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -70,6 +71,19 @@ public final class DlvMirrorDebugProcess extends XDebugProcess implements Dispos
     @Override
     public @NotNull XDebuggerEditorsProvider getEditorsProvider() {
         return debugProcess.getEditorsProvider();
+    }
+
+    public void refreshSources() {
+        this.send(new DlvRequest.ListSources()).onSuccess(sourceList -> {
+            final Method method;
+            try {
+                method = DlvDebugProcess.class.getDeclaredMethod("setPositionConverter", List.class);
+                method.setAccessible(true);
+                method.invoke(debugProcess, sourceList);
+            } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     @Override
