@@ -10,7 +10,16 @@
   <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
   <vendor email="bofa1exx@gmail.com">icoder</vendor>
 
-  <description>Go Remote plus over dlv protocol integration</description>
+  <description><![CDATA[
+Provides support for Dlvx Tool.
+The support includes:
+<ul>
+  <li>Go Remote plus over dlv protocol</li>
+  <li>Support for go-plugin debugging</li>
+</ul>
+For more information visit the
+<a href="https://github.com/BOFA1ex/dlvx.com">dlvx</a>.
+]]></description>
   <!-- Product and plugin compatibility requirements.
        Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
   <depends>com.intellij.modules.platform</depends>
