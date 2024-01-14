@@ -47,7 +47,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-@SuppressWarnings({"UnstableApiUsage", "deprecation"})
+@SuppressWarnings({"UnstableApiUsage"})
 public final class DlvMirrorDebugProcess extends XDebugProcess implements Disposable {
     private final DlvDebugProcess debugProcess;
     private final XBreakpointHandler<?>[] breakpointHandlers;
@@ -111,12 +111,6 @@ public final class DlvMirrorDebugProcess extends XDebugProcess implements Dispos
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public void startStepOver() {
-        debugProcess.startStepOver();
-    }
-
-    @Override
     public void startStepOver(@Nullable XSuspendContext context) {
         debugProcess.startStepOver(context);
     }
@@ -126,21 +120,9 @@ public final class DlvMirrorDebugProcess extends XDebugProcess implements Dispos
         debugProcess.startForceStepInto(context);
     }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public void startStepInto() {
-        debugProcess.startStepInto();
-    }
-
     @Override
     public void startStepInto(@Nullable XSuspendContext context) {
         debugProcess.startStepInto(context);
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public void startStepOut() {
-        debugProcess.startStepOut();
     }
 
     @Override
@@ -159,11 +141,6 @@ public final class DlvMirrorDebugProcess extends XDebugProcess implements Dispos
     }
 
     @Override
-    public @Nullable XAlternativeSourceHandler getAlternativeSourceHandler() {
-        return debugProcess.getAlternativeSourceHandler();
-    }
-
-    @Override
     public void stop() {
         debugProcess.stop();
     }
@@ -174,18 +151,8 @@ public final class DlvMirrorDebugProcess extends XDebugProcess implements Dispos
     }
 
     @Override
-    public void resume() {
-        debugProcess.resume();
-    }
-
-    @Override
     public void resume(@Nullable XSuspendContext context) {
         debugProcess.resume(context);
-    }
-
-    @Override
-    public void runToPosition(@NotNull XSourcePosition position) {
-        debugProcess.runToPosition(position);
     }
 
     @Override
