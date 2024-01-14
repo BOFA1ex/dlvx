@@ -137,7 +137,7 @@ public final class DlvMirrorDebugProcess extends XDebugProcess implements Dispos
 
     @Override
     public @Nullable XDropFrameHandler getDropFrameHandler() {
-        return debugProcess.getDropFrameHandler();
+        return null;
     }
 
     @Override
@@ -227,7 +227,7 @@ public final class DlvMirrorDebugProcess extends XDebugProcess implements Dispos
 
     @Override
     public boolean dependsOnPlugin(@NotNull IdeaPluginDescriptor descriptor) {
-        return debugProcess.dependsOnPlugin(descriptor);
+        return false;
     }
 
     @SuppressWarnings("unchecked")
