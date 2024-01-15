@@ -45,7 +45,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-@SuppressWarnings({"UnstableApiUsage"})
 public final class DlvMirrorDebugProcess extends XDebugProcess implements Disposable {
     private final DlvDebugProcess debugProcess;
     private final XBreakpointHandler<?>[] breakpointHandlers;
