@@ -9,7 +9,6 @@ import com.goide.dlv.protocol.DlvRequest;
 import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.ui.ExecutionConsole;
-import com.intellij.ide.plugins.IdeaPluginDescriptor;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.util.Computable;
@@ -21,7 +20,6 @@ import com.intellij.xdebugger.breakpoints.XBreakpoint;
 import com.intellij.xdebugger.breakpoints.XBreakpointHandler;
 import com.intellij.xdebugger.evaluation.XDebuggerEditorsProvider;
 import com.intellij.xdebugger.evaluation.XDebuggerEvaluator;
-import com.intellij.xdebugger.frame.XDropFrameHandler;
 import com.intellij.xdebugger.frame.XSuspendContext;
 import com.intellij.xdebugger.frame.XValueMarkerProvider;
 import com.intellij.xdebugger.stepping.XSmartStepIntoHandler;
@@ -136,11 +134,6 @@ public final class DlvMirrorDebugProcess extends XDebugProcess implements Dispos
     }
 
     @Override
-    public @Nullable XDropFrameHandler getDropFrameHandler() {
-        return null;
-    }
-
-    @Override
     public void stop() {
         debugProcess.stop();
     }
@@ -223,11 +216,6 @@ public final class DlvMirrorDebugProcess extends XDebugProcess implements Dispos
     @Override
     public void logStack(@NotNull XSuspendContext suspendContext, @NotNull XDebugSession session) {
         debugProcess.logStack(suspendContext, session);
-    }
-
-    @Override
-    public boolean dependsOnPlugin(@NotNull IdeaPluginDescriptor descriptor) {
-        return false;
     }
 
     @SuppressWarnings("unchecked")
