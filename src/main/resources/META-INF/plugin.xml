@@ -29,7 +29,6 @@ For more information visit the
        Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
   <extensions defaultExtensionNs="com.intellij">
     <xdebugger.breakpointType implementation="io.github.bofa1ex.dlvx.breakpoint.DlvFunctionBreakPointType"/>
-<!--    <programRunner implementation="io.github.bofa1ex.dlvx.run.DlvxGoDebugRunner"/>-->
     <configurationType implementation="io.github.bofa1ex.dlvx.execution.DlvxRemoteDebugConfigurationType"/>
   </extensions>
 </idea-plugin>
