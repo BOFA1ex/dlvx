@@ -69,7 +69,13 @@ public class DlvFunctionBreakpointHandler extends DlvBreakpointProxyHandler<XLin
                 return Promises.rejectedPromise();
             }
 
-            return mirrorDebugProcess.send(new DlvCreateFunctionBreakpoint(locations.get(0).pc));
+            final DlvApi.Location location = locations.get(0);
+            if (location == null) {
+                mirrorDebugProcess.getSession().setBreakpointInvalid(breakpoint, DlvxBundle.message("go.debugger.no.location.information.for.function", breakpoint.getProperties().functionName));
+                return Promises.rejectedPromise();
+            }
+
+            return mirrorDebugProcess.send(new DlvCreateFunctionBreakpoint(location.pc));
         }).onSuccess((b) -> {
             mirrorDebugProcess.refreshSources();
             mirrorDebugProcess.breakpoints().put(breakpoint, b.id);
