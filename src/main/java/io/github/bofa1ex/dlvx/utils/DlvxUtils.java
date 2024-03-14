@@ -37,8 +37,8 @@ public class DlvxUtils {
                 psiElement = psiElement.getParent();
             }
 
-            if (parent instanceof GoFunctionOrMethodDeclaration) {
-                res.set(((GoFunctionOrMethodDeclaration) parent));
+            if (parent instanceof GoFunctionOrMethodDeclaration goFunctionOrMethodDeclaration) {
+                res.set(goFunctionOrMethodDeclaration);
                 return false;
             }
 
