@@ -1,8 +1,7 @@
 # dlvx
-
 ![Build](https://github.com/BOFA1ex/dlvx/workflows/Build/badge.svg)
-[![Version](https://img.shields.io/jetbrains/plugin/v/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/23495-dlvx)
-[![Downloads](https://img.shields.io/jetbrains/plugin/d/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/23495-dlvx)
+[![Version](https://img.shields.io/jetbrains/plugin/v/23495.svg)](https://plugins.jetbrains.com/plugin/23495)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/23495.svg)](https://plugins.jetbrains.com/plugin/23495)
 
 ## How to use 
 [![Tutorial](https://img.youtube.com/vi/mOK-5DCDVNY/0.jpg)](https://www.youtube.com/watch?v=mOK-5DCDVNY)
