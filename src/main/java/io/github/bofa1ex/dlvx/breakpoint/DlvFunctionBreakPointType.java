@@ -1,6 +1,5 @@
 package io.github.bofa1ex.dlvx.breakpoint;
 
-import com.goide.dlv.breakpoint.DlvBreakpointProperties;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
